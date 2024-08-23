@@ -4,9 +4,9 @@ export function renderTasks(tasks) {
   const marcup = tasks
     .map(
       task => `
-      <li class="task-list--item">
-        ${task}
-        <button type="button" class="task-list--btn">Видалити</button>
+      <li class="task-list--item" id=${task.id}>
+        ${task.text}
+        <button class="task-list--item-btn" type="button" class="task-list--btn">Видалити</button>
       </li>
     `
     )

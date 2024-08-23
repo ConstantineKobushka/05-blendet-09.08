@@ -11,7 +11,6 @@ export function readFromLocalStorage(key) {
   try {
     let serializedState = JSON.parse(localStorage.getItem(key));
 
-    console.log(serializedState);
     if (serializedState === null) {
       return (serializedState = []);
     }

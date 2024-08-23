@@ -15,6 +15,6 @@ import {
 Список із завданнями має бути доступним після перезавантаження сторінки.
 */
 
-refs.taskForm.addEventListener('submit', onTaskFormSubmit);
 document.addEventListener('DOMContentLoaded', initFunction);
+refs.taskForm.addEventListener('submit', onTaskFormSubmit);
 refs.taskList.addEventListener('click', onRemuveButtonClick);

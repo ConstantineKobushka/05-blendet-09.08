@@ -1,2 +1,4 @@
-export let tasks = [];
-export const STORAGE_KEY = 'tasks';
+export const data = {
+  STORAGE_KEY: 'tasks',
+  tasks: [],
+};

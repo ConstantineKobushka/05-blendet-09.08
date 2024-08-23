@@ -1,23 +1,37 @@
-import { STORAGE_KEY, tasks } from './data';
+import { data } from './data';
 import { readFromLocalStorage, saveToLocalStorage } from './local-storage';
 import { renderTasks } from './render-functions';
 
 export function onTaskFormSubmit(e) {
   e.preventDefault();
-  const task = e.target.elements.taskName.value.trim();
-  tasks.push(task);
-  renderTasks(tasks);
-  saveToLocalStorage(STORAGE_KEY, tasks);
+  const taskText = e.target.elements.taskName.value.trim();
+  if (taskText === '') {
+    e.target.elements.taskName.focus();
+    return;
+  }
+
+  const newTask = {
+    id: Date.now(),
+    text: taskText,
+  };
+
+  data.tasks.push(newTask);
+  renderTasks(data.tasks);
+  saveToLocalStorage(data.STORAGE_KEY, data.tasks);
   e.target.reset();
+  e.target.elements.taskName.focus();
 }
 
 export function initFunction() {
-  let dataFromLocalStarage = readFromLocalStorage(STORAGE_KEY);
-  console.log(dataFromLocalStarage);
-  tasks = dataFromLocalStarage;
-  renderTasks(tasks);
+  data.tasks = readFromLocalStorage(data.STORAGE_KEY);
+  renderTasks(data.tasks);
 }
 
 export function onRemuveButtonClick(e) {
-  if (e.targetarget.nodeName !== 'BUTTON') return;
+  if (e.target.nodeName !== 'BUTTON') return;
+  const parenNode = e.target.closest('.task-list--item');
+  const id = Number(parenNode.id);
+  data.tasks = data.tasks.filter(task => task.id !== id);
+  saveToLocalStorage(data.STORAGE_KEY, data.tasks);
+  parenNode.remove();
 }
